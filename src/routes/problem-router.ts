@@ -1,6 +1,6 @@
-import { Request, Response, Router } from "express";
-import { ProblemDao } from "../storage/problem-dao";
-import { Problem } from "../model/problem.model";
+import {Request, Response, Router} from "express";
+import {ProblemDao} from "../storage/problem-dao";
+import {Problem} from "../model/problem.model";
 
 export class ProblemRouter {
 
@@ -66,7 +66,7 @@ export class ProblemRouter {
 
 }
 
-const ProblemRouter = new ProblemRouter();
-ProblemRouter.init();
+const problemRouter = new ProblemRouter();
+problemRouter.init();
 
-export default ProblemRouter.router;
+export default problemRouter.router;
