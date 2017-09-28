@@ -2,7 +2,6 @@ import * as express from "express";
 import * as logger from "morgan";
 import * as bodyParser from "body-parser";
 import ProblemRouter from "./routes/problem-router";
-import TokenRouter from "./routes/token-router";
 let jwt = require('jsonwebtoken');
 
 class App {
@@ -71,7 +70,6 @@ class App {
 
         this.express.use('/', corsMiddleware, router);
         this.express.use('/api/problem', corsMiddleware, authMiddleware, ProblemRouter);
-        this.express.use('/api/token', corsMiddleware, TokenRouter);
     }
 
 }

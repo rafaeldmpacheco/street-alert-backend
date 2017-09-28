@@ -21,7 +21,7 @@ export class MySqlDatabase {
             let config: IConnectionConfig = {
                 host: 'localhost',
                 user: 'root',
-                password: 'root',
+                password: '',
                 database: 'street_problems'
             };
 

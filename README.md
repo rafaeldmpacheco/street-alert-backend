@@ -7,5 +7,3 @@
 1. `npm run watch` for watch source changes
 
 Runs on localhost:3000
-
-Default system user/password: admin1/senha
