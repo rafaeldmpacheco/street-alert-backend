@@ -1,5 +1,5 @@
-import { IConnection, IError } from "mysql";
-import { MySqlDatabase } from "./mysql-database";
+import {IConnection, IError} from "mysql";
+import {MySqlDatabase} from "./mysql-database";
 
 export class Storage {
 
@@ -12,44 +12,6 @@ export class Storage {
                     } else {
                         resolve(result);
                     }
-                })
-            })
-        })
-    }
-
-    public static beginTransaction(): Promise<any | IError> {
-        return new Promise((resolve, reject) => {
-            MySqlDatabase.getConnection().then((connection: IConnection) => {
-                connection.beginTransaction((error: IError) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve();
-                    }
-                })
-            })
-        })
-    }
-
-    public static commit(): Promise<any | IError> {
-        return new Promise((resolve, reject) => {
-            MySqlDatabase.getConnection().then((connection: IConnection) => {
-                connection.commit((error: IError) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve();
-                    }
-                })
-            })
-        })
-    }
-
-    public static rollback(): Promise<any | IError> {
-        return new Promise((resolve, reject) => {
-            MySqlDatabase.getConnection().then((connection: IConnection) => {
-                connection.rollback(() => {
-                    resolve();
                 })
             })
         })

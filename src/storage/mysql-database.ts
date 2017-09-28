@@ -1,5 +1,5 @@
 import * as mysql from "mysql";
-import { IConnection, IConnectionConfig, IError } from "mysql";
+import {IConnection, IConnectionConfig, IError} from "mysql";
 
 export class MySqlDatabase {
 

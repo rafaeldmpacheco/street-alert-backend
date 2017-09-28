@@ -2,6 +2,7 @@ import * as express from "express";
 import * as logger from "morgan";
 import * as bodyParser from "body-parser";
 import ProblemRouter from "./routes/problem-router";
+
 let jwt = require('jsonwebtoken');
 
 class App {
@@ -17,13 +18,13 @@ class App {
     private middleware(): void {
         this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
-        this.express.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(bodyParser.urlencoded({extended: false}));
     }
 
     private routes(): void {
         let router = express.Router();
 
-        router.get('/', (req, res, next) => {
+        router.get('/', (req, res) => {
             res.json({
                 message: 'Hello World!'
             });
@@ -52,7 +53,7 @@ class App {
         authMiddleware.use((req, res, next) => {
             let token: string = req.headers['authorization'];
             if (token) {
-                jwt.verify(token, 'ITATAKARU', function (err, decoded) {
+                jwt.verify(token, 'ITATAKARU', function (err) {
                     if (err) {
                         return res.status(401).send({
                             message: 'Invalid token.'

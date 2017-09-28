@@ -18,7 +18,7 @@ export class ProblemRouter {
         this.router.put('/', ProblemRouter.edit);
     }
 
-    private static getAll(request: Request, response: Response) {
+    private static getAll(response: Response) {
         ProblemDao.getAll().then((problems: Problem[]) => {
             response.status(200).send(problems)
         }).catch((error) => {

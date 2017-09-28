@@ -1,5 +1,5 @@
-import { Storage } from "./storage";
-import { Problem } from "../model/problem.model";
+import {Storage} from "./storage";
+import {Problem} from "../model/problem.model";
 
 export class ProblemDao {
 
