@@ -4,7 +4,7 @@ import {Problem} from "../model/problem.model";
 
 export class ProblemRouter {
 
-    router: Router;
+    public router: Router;
 
     constructor() {
         this.router = Router();
