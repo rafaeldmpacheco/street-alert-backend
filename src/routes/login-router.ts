@@ -2,7 +2,6 @@ import {Request, Response, Router} from "express";
 import {User} from "../model/user.model";
 import {UserDao} from "../storage/user-dao";
 import {IError} from "mysql";
-
 let jwt = require('jsonwebtoken');
 
 export interface Login {

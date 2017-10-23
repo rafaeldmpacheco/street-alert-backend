@@ -3,7 +3,7 @@ let jwt = require('jsonwebtoken');
 
 export class TokenRouter {
 
-    public router: Router;
+    router: Router;
 
     constructor() {
         this.router = Router();

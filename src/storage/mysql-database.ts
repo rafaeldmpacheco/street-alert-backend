@@ -19,9 +19,9 @@ export class MySqlDatabase {
     private static makeConnection(): Promise<IConnection> {
         return new Promise((resolve, reject) => {
             let config: IConnectionConfig = {
-                host: 'localhost',
+                host: '127.0.0.1',
                 user: 'root',
-                password: '',
+                password: 'root',
                 database: 'street_problems'
             };
 

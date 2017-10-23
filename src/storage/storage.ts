@@ -17,4 +17,42 @@ export class Storage {
         })
     }
 
+    public static beginTransaction(): Promise<any | IError> {
+        return new Promise((resolve, reject) => {
+            MySqlDatabase.getConnection().then((connection: IConnection) => {
+                connection.beginTransaction((error: IError) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve();
+                    }
+                })
+            })
+        })
+    }
+
+    public static commit(): Promise<any | IError> {
+        return new Promise((resolve, reject) => {
+            MySqlDatabase.getConnection().then((connection: IConnection) => {
+                connection.commit((error: IError) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve();
+                    }
+                })
+            })
+        })
+    }
+
+    public static rollback(): Promise<any | IError> {
+        return new Promise((resolve, reject) => {
+            MySqlDatabase.getConnection().then((connection: IConnection) => {
+                connection.rollback(() => {
+                    resolve();
+                })
+            })
+        })
+    }
+
 }

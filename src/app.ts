@@ -1,7 +1,7 @@
 import * as express from "express";
 import * as logger from "morgan";
 import * as bodyParser from "body-parser";
-import ProblemRouter from "./routes/problem-router";
+import ProductRouter from "./routes/product-router";
 import LoginRouter from "./routes/login-router";
 import TokenRouter from "./routes/token-router";
 
@@ -26,7 +26,7 @@ class App {
     private routes(): void {
         let router = express.Router();
 
-        router.get('/', (req, res) => {
+        router.get('/', (req, res, next) => {
             res.json({
                 message: 'Hello World!'
             });
@@ -36,10 +36,13 @@ class App {
 
         corsMiddleware.use(function (req, res, next) {
 
+            // Website you wish to allow to connect
             res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
 
+            // Request methods you wish to allow
             res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
+            // Request headers you wish to allow
             res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Methods,Authorization,Access-Control-Allow-Headers,Access-Control-Allow-Origin,X-Requested-With,content-type,X-Auth-Token');
 
             if ('OPTIONS' == req.method) {
@@ -48,6 +51,12 @@ class App {
                 next();
             }
 
+            // Set to true if you need the website to include cookies in the requests sent
+            // to the API (e.g. in case you use sessions)
+            // res.setHeader('Access-Control-Allow-Credentials', true);
+
+            // Pass to next layer of middleware
+            // next();
         });
 
         let authMiddleware = express.Router();
@@ -55,7 +64,7 @@ class App {
         authMiddleware.use((req, res, next) => {
             let token: string = req.headers['authorization'];
             if (token) {
-                jwt.verify(token, 'ITATAKARU', function (err) {
+                jwt.verify(token, 'ITATAKARU', function (err, decoded) {
                     if (err) {
                         return res.status(401).send({
                             message: 'Invalid token.'
@@ -72,7 +81,7 @@ class App {
         });
 
         this.express.use('/', corsMiddleware, router);
-        this.express.use('/api/problem', corsMiddleware, authMiddleware, ProblemRouter);
+        this.express.use('/api/product', corsMiddleware, authMiddleware, ProductRouter);
         this.express.use('/api/login', corsMiddleware, LoginRouter);
         this.express.use('/api/token', corsMiddleware, TokenRouter);
     }
