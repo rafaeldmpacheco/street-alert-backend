@@ -16,12 +16,12 @@ CREATE TABLE USERS(
     PASSWORD VARCHAR(40) NOT NULL
 );
 
-INSERT INTO PRODUCTS VALUES (1, 'rua 1', 'description 1');
-INSERT INTO PRODUCTS VALUES (2, 'rua 2', 'description 2');
-INSERT INTO PRODUCTS VALUES (3, 'rua 3', 'description 3');
-INSERT INTO PRODUCTS VALUES (4, 'rua 4', 'description 4');
-INSERT INTO PRODUCTS VALUES (5, 'rua 5', 'description 5');
-INSERT INTO PRODUCTS VALUES (6, 'rua 6', 'description 6');
+INSERT INTO PROBLEMS VALUES (1, 'rua 1', 'description 1');
+INSERT INTO PROBLEMS VALUES (2, 'rua 2', 'description 2');
+INSERT INTO PROBLEMS VALUES (3, 'rua 3', 'description 3');
+INSERT INTO PROBLEMS VALUES (4, 'rua 4', 'description 4');
+INSERT INTO PROBLEMS VALUES (5, 'rua 5', 'description 5');
+INSERT INTO PROBLEMS VALUES (6, 'rua 6', 'description 6');
 
 INSERT INTO USERS VALUES (1, 'admin1', SHA1('senha'));
 INSERT INTO USERS VALUES (2, 'admin2', SHA1('senha'));
