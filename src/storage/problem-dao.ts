@@ -1,20 +1,20 @@
 import {Storage} from "./storage";
-import {Problem} from "../model/product.model";
+import {Problem} from "../model/problem.model";
 
-export class ProductDao {
+export class ProblemDao {
 
-    public static save(product: Problem): Promise<any> {
+    public static save(problem: Problem): Promise<any> {
         let sql: string = `INSERT INTO PROBLEMS (ADDRESS, DESCRIPTION) 
-            VALUES ('${product.address}', '${product.description}')`;
+            VALUES ('${problem.address}', '${problem.description}')`;
 
         return Storage.executeSql(sql);
     }
 
-    public static edit(product: Problem): Promise<any> {
+    public static edit(problem: Problem): Promise<any> {
         let sql: string = `UPDATE PROBLEMS SET 
-                ADDRESS = '${product.address}', 
-                DESCRIPTION = '${product.description}' 
-            WHERE ID = ${product.id}`;
+                ADDRESS = '${problem.address}', 
+                DESCRIPTION = '${problem.description}' 
+            WHERE ID = ${problem.id}`;
 
         return Storage.executeSql(sql);
     }
@@ -29,8 +29,8 @@ export class ProductDao {
         let sql: string = `SELECT ID 'id', ADDRESS 'name', DESCRIPTION 'price' FROM PROBLEMS 
             WHERE ID = ${id}`;
 
-        return Storage.executeSql(sql).then((products: Problem[]) => {
-            return products[0];
+        return Storage.executeSql(sql).then((problems: Problem[]) => {
+            return problems[0];
         });
     }
 

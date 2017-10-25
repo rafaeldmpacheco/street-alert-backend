@@ -1,8 +1,8 @@
 import {Request, Response, Router} from "express";
-import {ProductDao} from "../storage/product-dao";
-import {Problem} from "../model/product.model";
+import {ProblemDao} from "../storage/problem-dao";
+import {Problem} from "../model/problem.model";
 
-export class ProductRouter {
+export class ProblemRouter {
 
     router: Router;
 
@@ -12,16 +12,16 @@ export class ProductRouter {
     }
 
     public init() {
-        this.router.get('/', ProductRouter.getAll);
-        this.router.get('/:id', ProductRouter.getOne);
-        this.router.post('/', ProductRouter.save);
-        this.router.put('/', ProductRouter.edit);
+        this.router.get('/', ProblemRouter.getAll);
+        this.router.get('/:id', ProblemRouter.getOne);
+        this.router.post('/', ProblemRouter.save);
+        this.router.put('/', ProblemRouter.edit);
     }
 
     private static getAll(request: Request, response: Response) {
-        ProductDao.getAll().then((products: Problem[]) => {
+        ProblemDao.getAll().then((problems: Problem[]) => {
             response.status(200)
-                .send(products)
+                .send(problems)
         }).catch((error) => {
             response.status(500).send({
                 message: error.message
@@ -30,13 +30,13 @@ export class ProductRouter {
     }
 
     private static getOne(request: Request, response: Response) {
-        let productId: number = parseInt(request.params.id);
+        let problemId: number = parseInt(request.params.id);
 
-        ProductDao.get(productId).then((product: Problem) => {
-            if (product) {
-                response.status(200).send(product);
+        ProblemDao.get(problemId).then((problem: Problem) => {
+            if (problem) {
+                response.status(200).send(problem);
             } else {
-                response.status(404).send('No product found by the given id');
+                response.status(404).send('No problem found by the given id');
             }
         }).catch((error) => {
             response.status(500).send({
@@ -46,7 +46,7 @@ export class ProductRouter {
     }
 
     private static save(request: Request, response: Response) {
-        ProductDao.save(request.body).then(() => {
+        ProblemDao.save(request.body).then(() => {
             response.status(200)
                 .send(request.body)
         }).catch((error) => {
@@ -57,7 +57,7 @@ export class ProductRouter {
     }
 
     private static edit(request: Request, response: Response) {
-        ProductDao.edit(request.body).then(() => {
+        ProblemDao.edit(request.body).then(() => {
             response.status(200)
                 .send(request.body)
         }).catch((error) => {
@@ -69,7 +69,7 @@ export class ProductRouter {
 
 }
 
-const productRouter = new ProductRouter();
-productRouter.init();
+const problemRouter = new ProblemRouter();
+problemRouter.init();
 
-export default productRouter.router;
+export default problemRouter.router;

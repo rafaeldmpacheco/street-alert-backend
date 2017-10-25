@@ -1,11 +1,7 @@
 import * as express from "express";
 import * as logger from "morgan";
 import * as bodyParser from "body-parser";
-import ProductRouter from "./routes/product-router";
-import LoginRouter from "./routes/login-router";
-import TokenRouter from "./routes/token-router";
-
-let jwt = require('jsonwebtoken');
+import ProblemRouter from "./routes/problem-router";
 
 class App {
 
@@ -51,39 +47,11 @@ class App {
                 next();
             }
 
-            // Set to true if you need the website to include cookies in the requests sent
-            // to the API (e.g. in case you use sessions)
-            // res.setHeader('Access-Control-Allow-Credentials', true);
-
-            // Pass to next layer of middleware
-            // next();
         });
 
-        let authMiddleware = express.Router();
-
-        authMiddleware.use((req, res, next) => {
-            let token: string = req.headers['authorization'];
-            if (token) {
-                jwt.verify(token, 'ITATAKARU', function (err, decoded) {
-                    if (err) {
-                        return res.status(401).send({
-                            message: 'Invalid token.'
-                        });
-                    } else {
-                        next();
-                    }
-                })
-            } else {
-                return res.status(403).send({
-                    message: 'No token provided.'
-                })
-            }
-        });
 
         this.express.use('/', corsMiddleware, router);
-        this.express.use('/api/product', corsMiddleware, authMiddleware, ProductRouter);
-        this.express.use('/api/login', corsMiddleware, LoginRouter);
-        this.express.use('/api/token', corsMiddleware, TokenRouter);
+        this.express.use('/api/problem', corsMiddleware, ProblemRouter);
     }
 
 }
