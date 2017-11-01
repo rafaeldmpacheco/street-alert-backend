@@ -5,8 +5,7 @@ export class ProblemDao {
 
     public static save(problem: Problem): Promise<any> {
         let sql: string = `INSERT INTO PROBLEMS (ADDRESS, DESCRIPTION) 
-            VALUES ('${problem.address}', '${problem.description}')`;
-
+        VALUES ('${problem.address}', '${problem.description}')`;
         return Storage.executeSql(sql);
     }
 
@@ -14,19 +13,19 @@ export class ProblemDao {
         let sql: string = `UPDATE PROBLEMS SET 
                 ADDRESS = '${problem.address}', 
                 DESCRIPTION = '${problem.description}' 
-            WHERE ID = ${problem.id}`;
+                WHERE ID = ${problem.id}`;
 
         return Storage.executeSql(sql);
     }
 
     public static getAll(): Promise<Problem[]> {
-        let sql: string = `SELECT ID 'id', ADDRESS 'name', DESCRIPTION 'price' FROM PROBLEMS`;
+        let sql: string = `SELECT ID 'id', ADDRESS 'address', DESCRIPTION 'description' FROM PROBLEMS`;
 
         return Storage.executeSql(sql);
     }
 
     public static get(id: number): Promise<Problem> {
-        let sql: string = `SELECT ID 'id', ADDRESS 'name', DESCRIPTION 'price' FROM PROBLEMS 
+        let sql: string = `SELECT ID 'id', ADDRESS 'address', DESCRIPTION 'description' FROM PROBLEMS 
             WHERE ID = ${id}`;
 
         return Storage.executeSql(sql).then((problems: Problem[]) => {
